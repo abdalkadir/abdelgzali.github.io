@@ -95,7 +95,7 @@ body > #wrapper {
 
 section.section1024 {
   max-width: 1024px;
-  padding: 6rem 0;
+  padding: 4rem 0;
 }
 
 .f-row {
@@ -158,19 +158,6 @@ section.section1024 {
 
 .show {
   opacity: 1 !important;
-}
-
-.tile a {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  bottom: 0;
-  left: 0;
-}
-
-.tile:hover header {
-  transition: opacity 0.5s;
-  opacity: 0.1;
 }
 
 @media screen and (max-width: 768px) {
@@ -294,7 +281,7 @@ section#banner figure {
 
 section#banner figure #banner-photo {
   order: 2;
-  background-image: url(../images/banner-portrait.jpg);
+  background-image: url(../images/banner-portrait.jpeg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -354,132 +341,88 @@ section#banner figure .banner-icons li a:hover {
 
 /* PROJECTS */
 section#projects {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  position: relative;
   max-width: 1280px;
+  padding: 0 0 5rem;
+  overflow: hidden;
 }
 
 section#projects h2 {
-  flex: 1 0 100%;
   max-width: 1024px;
   margin: 0 auto 2rem;
 }
 
-section#projects article {
+.logo-carousel {
+  --logo-gap: clamp(2rem, 5vw, 4rem);
+  display: flex;
+  gap: var(--logo-gap);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000000 8%, #000000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000000 8%, #000000 92%, transparent);
+}
+
+.logo-carousel-track {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--logo-gap);
+  min-width: max-content;
+  animation: product-logo-scroll 34s linear infinite;
+}
+
+.logo-carousel li {
   display: flex;
   justify-content: center;
-  position: relative;
-  width: 48%;
-  height: 40vh;
-  min-height: 22rem;
-  max-height: 36rem;
-  padding: 3rem 1.5rem 1rem 1.5rem;
-  transition: transform 0.25s ease, opacity 0.25s ease, filter 1s ease, -webkit-filter 1s ease;
-  cursor: pointer;
+  align-items: center;
+  width: clamp(9rem, 18vw, 13rem);
+  height: 4.75rem;
+  padding: 1rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(244, 244, 255, 0.22);
   border-radius: 5px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
 }
 
-section#projects article > * {
-  z-index: 3;
-  position: relative;
-}
-
-
-section#projects article:before {
-  z-index: 1;
+.logo-carousel img {
+  display: block;
   width: 100%;
-  height: 100%;
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  opacity: 0.7;
-  transition: opacity 0.5s ease;
-  border-radius: 5px;
+  max-height: 2.7rem;
+  object-fit: contain;
 }
 
-section#projects article:hover:before{
-  opacity: 0;
+@keyframes product-logo-scroll {
+  to {
+    transform: translateX(calc(-100% - var(--logo-gap)));
+  }
 }
 
-section#projects article#project-one {
-  background-image: url(../images/basketball.png);
-}
+@media (prefers-reduced-motion: reduce) {
+  .logo-carousel {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 
-section#projects article#project-one:before {
-  background-color: #6fc3df;
-}
-
-section#projects article#project-two {
-  background-image: url(../images/juice.png);
-}
-
-section#projects article#project-two:before {
-  background-color: #8d82c4;
-}
-
-section#projects article#project-three,
-section#projects article#project-four {
-  margin-top: 2rem;
-}
-
-section#projects article#project-three {
-  background-image: url(../images/tatd.png);
-}
-
-section#projects article#project-three:before {
-  background-color: #f5cd79;
-}
-
-section#projects article#project-four {
-  background-image: url(../images/ingrezza.png);
-}
-
-section#projects article#project-four:before {
-  background-color: #cf6a87;
-}
-
-
-
-section#projects article h3 {
-  font-weight: bolder;
-}
-
-section#projects article h3 + p {
-  text-transform: uppercase;
-  font-size: 0.7rem;
-}
-
-section#projects header {
-  margin: auto;
-}
-
-section#projects article:hover header h3,
-section#projects article:hover header p {
-  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-             0px 8px 13px rgba(0,0,0,0.1),
-             0px 18px 23px rgba(0,0,0,0.1);
+  .logo-carousel-track {
+    animation: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
   section#projects {
-    flex-direction: column;
+    padding: 1rem 0 3.5rem;
   }
 
-  section#projects article {
-    width: 100%;
-    height: 60vh;
-    min-height: 18rem;
-    max-height: 32rem;
+  .logo-carousel {
+    --logo-gap: 1rem;
   }
 
-  section#projects article:first-of-type {
-    margin-bottom: 2rem;
+  .logo-carousel li {
+    width: 8.5rem;
+    height: 4rem;
+    padding: 0.875rem 1rem;
+  }
+
+  .logo-carousel img {
+    max-height: 2.25rem;
   }
 }
 
@@ -717,4 +660,8 @@ footer > .copyright {
   height: 100%;
   position: fixed;
   z-index: -1;
+}
+
+.section-title {
+  text-align: center;
 }
