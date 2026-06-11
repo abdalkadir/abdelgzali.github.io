@@ -41,9 +41,6 @@ a.icon {
 .icon-envelop:before {
   content: "\e945";
 }
-.icon-arrow-right2:before {
-  content: "\ea3c";
-}
 .icon-github:before {
   content: "\eab0";
 }
