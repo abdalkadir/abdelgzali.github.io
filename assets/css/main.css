@@ -165,18 +165,22 @@ em {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  column-gap: 0.6em;
+  column-gap: 0.9em;
   row-gap: 0.2em;
-  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+  font-size: clamp(0.95rem, 2.4vw, 1.4rem);
   font-weight: 500;
   line-height: 1.3;
 }
 
-/* Orange dot separators — trailing ::after keeps the dot pinned to its keyword,
-   so a wrapped line never begins with a dangling dot. */
-.hero-keywords span:not(:last-child)::after {
-  content: "\2022";
-  margin-left: 0.6em;
+/* Keywords are grouped into nowrap pairs; the orange dot lives *between* the
+   two keywords of a pair, so it can never dangle at the start or end of a
+   wrapped line. Pairs wrap as whole units. */
+.hero-keywords .kw-pair {
+  white-space: nowrap;
+}
+
+.hero-keywords .kw-dot {
+  margin: 0 0.55em;
   color: var(--accent);
   font-weight: 600;
 }
